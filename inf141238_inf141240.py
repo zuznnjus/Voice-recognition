@@ -4,10 +4,6 @@ import numpy as np
 import matplotlib.pyplot as plt
 import warnings
 
-<<<<<<< HEAD
-=======
-
->>>>>>> 5beabd1ebc7a9e70e35b89d390a7f7632c3e8391
 def getSignalData(w, signal):
     n = signal.shape[0]
     frequencies = np.arange(n) / n * w
@@ -16,10 +12,6 @@ def getSignalData(w, signal):
 
     return frequencies, signal_kaiser_fft
 
-<<<<<<< HEAD
-=======
-
->>>>>>> 5beabd1ebc7a9e70e35b89d390a7f7632c3e8391
 def harmonicProductSpectrum(frequencies, signal_fft):
     fig = plt.figure(figsize=(8, 10), dpi=80)
     ax = fig.add_subplot(5, 1, 1)
@@ -38,15 +30,8 @@ def harmonicProductSpectrum(frequencies, signal_fft):
 
     return frequencies[np.argmax(signal_hps)]
 
-<<<<<<< HEAD
 def main():
     warnings.filterwarnings('ignore')
-=======
-
-def main():
-    warnings.filterwarnings('ignore')
-
->>>>>>> 5beabd1ebc7a9e70e35b89d390a7f7632c3e8391
     filename = 'trainall/001_K.wav'
     w, signal = wavfile.read(filename)
 
@@ -55,10 +40,6 @@ def main():
 
     frequencies, signal_fft = getSignalData(w, signal)
     max_freq = harmonicProductSpectrum(frequencies, signal_fft)
-<<<<<<< HEAD
-=======
-
->>>>>>> 5beabd1ebc7a9e70e35b89d390a7f7632c3e8391
     print(max_freq)
 
     if max_freq < 170:
@@ -66,9 +47,5 @@ def main():
     else:
         print('K')
 
-<<<<<<< HEAD
-=======
-
->>>>>>> 5beabd1ebc7a9e70e35b89d390a7f7632c3e8391
 if __name__ == '__main__':
     main()
