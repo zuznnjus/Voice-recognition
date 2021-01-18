@@ -29,9 +29,12 @@ def harmonicProductSpectrum(frequencies, signal_fft):
         ax.plot(frequencies, signal_hps, '-')
         ax.set_xlim(0, 1000)
 
-    # plt.show()
     left_boundary = np.where(frequencies > 20)[0][0]
-    return frequencies[np.argmax(signal_hps[left_boundary:])]
+    right_boundary = np.where(frequencies > 1000)[0][0]
+    maxfreqq = frequencies[left_boundary:right_boundary][np.argmax(signal_hps[left_boundary:right_boundary])]
+    print(maxfreqq)
+    plt.show()
+    return maxfreqq
 
 def main():
     warnings.filterwarnings('ignore')
@@ -41,7 +44,7 @@ def main():
     recognised = 0
     unrecognised = []
 
-    for file in os.listdir("trainall"):
+    for file in os.listdir("trainproblematic2"):
         if file.endswith(".wav"):
             filename = file
             all += 1
@@ -51,7 +54,7 @@ def main():
         elif re.match("\\d{3}_M.wav", filename):
             gender = 'M'
 
-        w, signal = wavfile.read("trainall/" + filename)
+        w, signal = wavfile.read("trainproblematic2/" + filename)
 
         if len(signal.shape) > 1:     # only first channel
             signal = signal[:, 0]
@@ -61,22 +64,20 @@ def main():
         # print(max_freq)
 
         if max_freq < 170:
-            print(filename + ' : M')
-            print(max_freq)
+            print(filename + ' M')
             if gender == 'M':
                 recognised += 1
             else:
                 unrecognised.append(filename)
         else:
-            print(filename + ' : K')
-            print(max_freq)
+            print(filename + ' M')
             if gender == 'K':
                 recognised += 1
             else:
                 unrecognised.append(filename)
 
     print(recognised*100/all)
-    # print(unrecognised)
+    print(len(unrecognised))
 
 if __name__ == '__main__':
     main()
